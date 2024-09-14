@@ -46,6 +46,9 @@ class Usuario:
     def fechaNacimiento(self, fechaNaci):
         self.__fechaNacimiento = fechaNaci
 
+    def __str__(self) -> str:
+        return self.__nomUsuario
+
     def solicitud(self, libroDispo):  # el 1 es para decir que esta disponible
         if libroDispo == 1:
             print("El libro esta disponible")
@@ -57,10 +60,10 @@ class Usuario:
             return 1
             # retorna el mismo caracter para indicar que no seguira disponible
 
-    def devolverLibro(self, devolucion):
-        if devolucion == 0:
+    def devolverLibro(self, estado):
+        if estado == "Donado" or "donado":
             print("El libro fue devuelto correctamente")
-            return 1
-        elif devolucion == 1:
-            print("Error al devolver")
-            return devolucion
+            return "Devuelto"
+        else:
+            print("Error al devolver, este libro no fue prestado o no existe")
+            return None

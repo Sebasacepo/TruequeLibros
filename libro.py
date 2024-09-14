@@ -1,6 +1,16 @@
 class Libro:
     def __init__(
-        self, idLibro, titulo, autor, genero, anoPubli, ISBN, estado, dispo, donante
+        self,
+        idLibro,
+        titulo,
+        autor,
+        genero,
+        anoPubli,
+        ISBN,
+        estado,
+        donante,
+        dispo,
+        receptor="Sin lector",  # Es a quien fue donado
     ):
         self.__idLibro = idLibro
         self.__titulo = titulo
@@ -11,6 +21,7 @@ class Libro:
         self.__estado = estado
         self.__dispo = dispo
         self.__donante = donante
+        self.__receptor = receptor
 
     @property
     def idLibro(self):
@@ -80,19 +91,49 @@ class Libro:
     def donante(self):
         return self.__donante
 
+    @donante.setter
+    def donante(self, setDonante):
+        self.__donante = setDonante
+
+    @property
+    def receptor(self):
+        return self.__receptor
+
+    @receptor.setter
+    def receptor(self, setReceptor):
+        self.__receptor = setReceptor
+
     def __str__(self) -> str:
-        if self.__dispo == 1:
-            dispo = "disponible"
-        else:
-            dispo = "no disponible"
         return (
-            "El libro "
-            + self.__titulo
-            + " con el codigo "
-            + str(self.__idLibro)
-            + " se encuentra "
-            + dispo
+            f"\n"
+            f"- ID: {self.__idLibro}\n"
+            f"- Título: {self.__titulo}\n"
+            f"- Autor: {self.__autor}\n"
+            f"- Género: {self.__genero}\n"
+            f"- Año de Publicación: {self.__anoPubli}\n"
+            f"- ISBN: {self.__ISBN}\n"
+            f"- Estado: {self.__estado}\n"
+            f"- Disponible: {self.__dispo}\n"
+            f"- Donante: {self.__donante}\n"
+            f"- Lector: {self.receptor}"
         )
+
+    def cambiarDispo(self, cambiarDispo):
+        if cambiarDispo == "Pendiente" or cambiarDispo == "pendiente":
+            self.__estado = "Donado"
+            self.__dispo = "No disponible"
+        elif cambiarDispo == "No disponible":
+            print("Error de solicitud el libro ya estaba no disponible")
+
+    def cambiarDispo(self, cambiarDispo):
+        if cambiarDispo == "Devuelto" or cambiarDispo == "Devuelto":
+            self.__estado = "Devuelto"
+            self.__dispo = "Disponible"
+        else:
+            print("Error de solicitud el libro ya estaba no disponible")
+
+    def cambiarReceptor(self, nuevoReceptor):
+        self.__receptor = nuevoReceptor
 
 
 class LibroNoFicci(Libro):

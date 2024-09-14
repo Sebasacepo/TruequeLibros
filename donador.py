@@ -32,11 +32,21 @@ class Donador(Usuario):
     def direcccion(self, setDir):
         self.__direccion = setDir
 
-    def respuesta(self, resp):
-        if resp == 1:  # el 1 es para aceptar la respuesta
-            print("El donante a aceptado la solicitud")
-            print("Puedes pasar a recoger el libro ahora")
-            return 0
-        else:  # cualquier otra respuesta es para rechazar, lo mas optimo es 0
-            print("Lo sentimos, su solicitud fue rechazada")
-            return 1
+    def respuesta(self, resp, pendiente):
+        if pendiente == "Pendiente" or pendiente == "pendiente":
+            if (
+                resp == "Aceptar" or resp == "aceptar"
+            ):  # el 1 es para aceptar la respuesta
+                print("El donante a aceptado la solicitud")
+                print("Puedes pasar a recoger el libro ahora")
+                return "Aceptada"
+            else:  # cualquier otra respuesta es para rechazar, lo mas optimo es 0
+                print("Lo sentimos, su solicitud fue rechazada")
+                return "Rechazada"
+        elif pendiente == "Aceptada" or "Rechazada" or "aceptada" or "rechazada":
+            print("No se puede ejecutar por que la solicitud ya tiene respuesta")
+            return None
+
+    def pedirLibroDonado(self, lector):
+        if lector == "sin lector" or "Sin lector":
+            print("No puedes pedir un libro que donaste")

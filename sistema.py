@@ -33,9 +33,9 @@ libro1 = libroNoFic(
     "Filosofia",
     date2.year,
     123,
-    "nuevo",
-    1,
+    "Sin donar",
     donador1,
+    "Disponible",
     "moralidad",
 )
 libro2 = libroNoFic(
@@ -45,9 +45,9 @@ libro2 = libroNoFic(
     "Psicología",
     date3.year,
     135,
-    "usado",
-    1,
+    "Sin donar",
     donador2,
+    "Disponible",
     "psicoanalisis",
 )
 
@@ -58,9 +58,9 @@ libro3 = libroFic(
     "Novela",
     date4.year,
     154,
-    "nuevo",
-    1,
-    donador1,
+    "Usado",
+    donador2,
+    "Disponible",
     1,
     2,
 )
@@ -71,36 +71,45 @@ libro4 = libroFic(
     "cyberpunk",
     date4.year,
     199,
-    "nuevo",
-    1,
+    "Sin donar",
     donador2,
+    "Disponible",
     2,
     3,
 )
 # PRIMER SOLICITUD
-print("--------------------SOLICITUD 1--------------")
-solicitud1 = soli(100000, 2, fechaActual, lector2, libro1)  # Se genera solicitud
+print("--------------------SOLICITUD 1-------------------------")
+solicitud1 = soli("Pendiente", fechaActual, lector2, libro1)  # Se genera solicitud
+print(solicitud1)
+libro1.cambiarDispo(solicitud1.estado)
+print(libro1)
+respuesta = donador1.respuesta("Aceptar", solicitud1.estado)  # respuesta
+solicitud1.cambiarEstado(respuesta)  # CAMBIA EL ESTADO CON LA RESPUESTA
+donador1.respuesta(
+    "Aceptar", solicitud1.estado
+)  # INTENTO DE VOLVER A ACEPTAR LA SOLICITUD
+print("Verifico si el estado la solicitud está resulto" + str(solicitud1.estado))
+devolverLibro = lector2.devolverLibro("Devolver")
+libro1.cambiarDispo(devolverLibro)
+libro1.cambiarReceptor(lector2)  # Se cambia lector a la nueva persona
+print(libro1)  # Se vuelve a los datos anteriores
+donador1.pedirLibroDonado(libro1.receptor)  # solicita libro que dono
 
-libro1.dispo = lector1.solicitud(solicitud1.libro.dispo)
 
-# el 1 para indicar que la acepta y el 0 para rechazar
-respuesta = donador1.respuesta(1)
-solicitud1.estado = solicitud1.resSolicitud(respuesta)
-libro1.dispo = respuesta
-print(str(libro1) + " ahora")
-print("-----------------------------------------")
+print("-----------------Solicitud 2 -------------------")
 
-print("--------------Intento de responder dos veces una colicitud--------------")
-# el 1 para indicar que la acepta y el 0 para rechazar
-solicitud1.estado = solicitud1.resSolicitud(respuesta)
-
-print("-----------------------------------------")
-
-print("--------------------devolucion 1--------------")
-respuesta = user.devolverLibro(lector2, respuesta)  # Devolviendo el libro
-libro1.dispo = respuesta
-print(str(libro1) + " ahora")  # Ya el libro esta disponible de nuevo
-respuesta = user.devolverLibro(
-    lector2, respuesta
-)  # Intento de devolver un libro ya devuelto
-print("-----------------------------------------")
+solicitud2 = soli("Pendiente", fechaActual, lector1, libro3)
+print(solicitud2)
+libro3.cambiarDispo(solicitud2.estado)
+print(libro3)
+respuesta = donador1.respuesta("Aceptar", solicitud2.estado)  # respuesta
+solicitud2.cambiarEstado(respuesta)  # CAMBIA EL ESTADO CON LA RESPUESTA
+donador1.respuesta(
+    "Aceptar", solicitud2.estado
+)  # INTENTO DE VOLVER A ACEPTAR LA SOLICITUD
+print("Verifico si el estado la solicitud está resulto" + str(solicitud2.estado))
+devolverLibro = lector1.devolverLibro("Devolver")
+libro3.cambiarDispo(devolverLibro)
+libro3.cambiarReceptor(lector1)  # Se cambia lector a la nueva persona
+print(libro3)  # Se vuelve a los datos anteriores
+donador1.pedirLibroDonado(libro3.receptor)  # solicita libro que dono
