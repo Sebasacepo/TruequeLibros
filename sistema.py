@@ -90,7 +90,7 @@ donador1.respuesta(
 )  # INTENTO DE VOLVER A ACEPTAR LA SOLICITUD
 print("Verifico si el estado la solicitud está resulto" + str(solicitud1.estado))
 devolverLibro = lector2.devolverLibro("Devolver")
-libro1.cambiarDispo(devolverLibro)
+libro1.devolver(devolverLibro)
 libro1.cambiarReceptor(lector2)  # Se cambia lector a la nueva persona
 print(libro1)  # Se vuelve a los datos anteriores
 donador1.pedirLibroDonado(libro1.receptor)  # solicita libro que dono
@@ -109,7 +109,7 @@ donador1.respuesta(
 )  # INTENTO DE VOLVER A ACEPTAR LA SOLICITUD
 print("Verifico si el estado la solicitud está resulto" + str(solicitud2.estado))
 devolverLibro = lector1.devolverLibro("Devolver")
-libro3.cambiarDispo(devolverLibro)
+libro3.devolver(devolverLibro)
 libro3.cambiarReceptor(lector1)  # Se cambia lector a la nueva persona
 print(libro3)  # Se vuelve a los datos anteriores
 donador1.pedirLibroDonado(libro3.receptor)  # solicita libro que dono

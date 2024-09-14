@@ -125,8 +125,8 @@ class Libro:
         elif cambiarDispo == "No disponible":
             print("Error de solicitud el libro ya estaba no disponible")
 
-    def cambiarDispo(self, cambiarDispo):
-        if cambiarDispo == "Devuelto" or cambiarDispo == "Devuelto":
+    def devolver(self, Devolver):
+        if Devolver == "Devuelto" or Devolver == "Devuelto":
             self.__estado = "Devuelto"
             self.__dispo = "Disponible"
         else:
